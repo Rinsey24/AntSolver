@@ -30,8 +30,8 @@ namespace AntSolver
                 
                 var nodes = new[]
                 {
-                    new NodeRequirement { Node = 1, LiquidNeeded = -1 }, // Root
-                    new NodeRequirement { Node = 2, LiquidNeeded = -1 }, // Intermediate
+                    new NodeRequirement { Node = 1, LiquidNeeded = -1 },
+                    new NodeRequirement { Node = 2, LiquidNeeded = -1 }, 
                     new NodeRequirement { Node = 3, LiquidNeeded = 10 },
                     new NodeRequirement { Node = 4, LiquidNeeded = 20 },
                     new NodeRequirement { Node = 5, LiquidNeeded = 5 }
