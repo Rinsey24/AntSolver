@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using PipeNetwork;
 namespace AntSolver;
 
   public class Program
@@ -32,7 +32,7 @@ namespace AntSolver;
             return ok;
         }
 
-        // Find minimum liquid needed using binary search
+        
         public static double Solve(List<PipeConnection>[] adjList, int[] liquidNeeded)
         {
             double low = 0.0;
@@ -59,7 +59,7 @@ namespace AntSolver;
 
             try
             {
-                // Read number of nodes
+              
                 int n = int.Parse(Console.ReadLine() ?? throw new FormatException("Invalid input for number of nodes"));
                 if (n <= 0)
                 {
@@ -73,7 +73,7 @@ namespace AntSolver;
 
                 var edges = new HashSet<(int, int)>();
 
-                // Read pipe connections
+              
                 for (int i = 0; i < n - 1; i++)
                 {
                     var input = Console.ReadLine()?.Split(' ').Select(x => int.TryParse(x, out var num) ? num : (int?)null).ToList();
@@ -114,8 +114,7 @@ namespace AntSolver;
                     adjList[from].Add(connection);
                     context.PipeConnections.Add(connection);
                 }
-
-                // Read liquid requirements
+                
                 var liquidInput = Console.ReadLine()?.Split(' ').Select(x => int.TryParse(x, out var num) ? num : -1).ToList();
                 if (liquidInput == null || liquidInput.Count != n)
                 {
@@ -131,7 +130,7 @@ namespace AntSolver;
 
                 await context.SaveChangesAsync();
 
-                // Calculate and output result
+       
                 double result = Solve(adjList, liquidNeeded);
                 Console.WriteLine($"{result:F3}");
             }
