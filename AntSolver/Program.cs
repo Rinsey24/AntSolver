@@ -59,16 +59,16 @@ public class Program
 
         if (choice == "2")
         {
-            // ПРОСТО ВЫЗЫВАЕМ СУЩЕСТВУЮЩИЙ ТЕСТ ИЗ Test.cs
+            
             await Test.RunTest();
             return;
         }
 
-        // Основная программа
+
         await RunMainProgram();
     }
 
-// ЭТО ОТДЕЛЬНЫЙ МЕТОД ВНЕ Main
+
     public static async Task RunTests()
     {
         // ПРОСТО ВЫЗЫВАЕМ СУЩЕСТВУЮЩИЙ ТЕСТ ИЗ Test.cs
