@@ -16,17 +16,20 @@ namespace AntSolver
             try
             {
             
-                var optionsBuilder = new DbContextOptionsBuilder<PipeNetworkContext>();
-                optionsBuilder.UseSqlite("Data Source=pipenetwork.db");
-                using var context = new PipeNetworkContext(optionsBuilder.Options);
-                
+                var options = new DbContextOptionsBuilder<PipeNetworkContext>()
+                    .UseInMemoryDatabase(databaseName: "Test_" + Guid.NewGuid().ToString())
+                    .Options;
+
+                using var context = new PipeNetworkContext(options);
+            
                 await context.Database.EnsureCreatedAsync();
-                Console.WriteLine("Database created successfully.");
+                Console.WriteLine("База данных создана.");
+
                 
                 context.PipeConnections.RemoveRange(context.PipeConnections);
                 context.NodeRequirements.RemoveRange(context.NodeRequirements);
                 await context.SaveChangesAsync();
-                Console.WriteLine("Existing data cleared.");
+                Console.WriteLine("База данных очищена.");
                 
                 var nodes = new[]
                 {
@@ -59,7 +62,7 @@ namespace AntSolver
                     Console.WriteLine($"От: {conn.FromNode}, Кому: {conn.ToNode}, Процент: {conn.Percentage}, SuperPipe: {conn.SuperPipe}");
                 }
 
-                Console.WriteLine("\nStored Node Requirements:");
+                Console.WriteLine("\nТребования к хранимым узлам:");
                 foreach (var req in storedRequirements)
                 {
                     Console.WriteLine($"Узел: {req.Node},Жидкости нужно: {req.LiquidNeeded}");
