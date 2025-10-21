@@ -71,7 +71,6 @@ public class Program
 
     public static async Task RunTests()
     {
-        // ПРОСТО ВЫЗЫВАЕМ СУЩЕСТВУЮЩИЙ ТЕСТ ИЗ Test.cs
         await Test.RunTest();
     }
 
