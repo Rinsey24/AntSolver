@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AntSolver;
 
-namespace PipeNetwork
+namespace AntSolver
 {
     public class Test
     {
@@ -15,22 +15,19 @@ namespace PipeNetwork
         {
             try
             {
-                // Configure DbContext with SQLite
+            
                 var optionsBuilder = new DbContextOptionsBuilder<PipeNetworkContext>();
                 optionsBuilder.UseSqlite("Data Source=pipenetwork.db");
                 using var context = new PipeNetworkContext(optionsBuilder.Options);
-
-                // Ensure the database is created
+                
                 await context.Database.EnsureCreatedAsync();
                 Console.WriteLine("Database created successfully.");
-
-                // Clear existing data to start fresh
+                
                 context.PipeConnections.RemoveRange(context.PipeConnections);
                 context.NodeRequirements.RemoveRange(context.NodeRequirements);
                 await context.SaveChangesAsync();
                 Console.WriteLine("Existing data cleared.");
-
-                // Add test data: 5 nodes
+                
                 var nodes = new[]
                 {
                     new NodeRequirement { Node = 1, LiquidNeeded = -1 }, // Root
@@ -40,8 +37,7 @@ namespace PipeNetwork
                     new NodeRequirement { Node = 5, LiquidNeeded = 5 }
                 };
                 context.NodeRequirements.AddRange(nodes);
-
-                // Add test data: 4 pipe connections
+                
                 var connections = new[]
                 {
                     new PipeConnection { FromNode = 1, ToNode = 2, Percentage = 50.0, SuperPipe = false },
